@@ -15,7 +15,8 @@
     <h3>Uploaded Files:</h3>
     <ul>
         {% for file in files %}
-            <li><a href="{% url 'download_file' file.id %}">{{ file.file.name }}</a></li>
+            <li><a href="{% url 'download_file' file.id %}">{{file.file.name }}</a></li>
+            <img src="{% url 'download_file' file.id %}" alt="Не то разрешение фото">
         {% empty %}
             <li>No files uploaded yet.</li>
         {% endfor %}
