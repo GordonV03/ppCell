@@ -1,21 +1,36 @@
+{% load static %}
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Upload and Download Files</title>
+    <title>CellSegPro</title>
+    <link rel="stylesheet" href=" {%static 'main/css/main.css' %}">
 </head>
+<header class="header">
+    <img src="media/img/genes 2.png" width="64px" height="64px">
+    <h2>CellSegPro</h2>
+</header>
 <body>
-    <h2>Upload Files</h2>
-
-    <form method="post" enctype="multipart/form-data">
+    <p class="info">CellSegPro - Ваш надежный гид в мире сегментации клеток.
+        Наш сайт предоставляет удобный и мощный инструментарий
+        для профессионалов и исследователей в области биологии
+        и медицины. Мы предлагаем инновационные методики и
+        программное обеспечение для точной сегментации клеток,
+        обработки изображений и анализа данных. Доверьте свои
+        исследования нам - CellSegPro поможет вам в ваших открытиях
+        на пути к новым медицинским и научным открытиям.</p>
+    <form class='form' method="post" enctype="multipart/form-data">
         {% csrf_token %}
-        {{ form.as_p }}
-        <button type="submit">Upload</button>
+        <div>{{ form.as_p }}</div>
+        <button class="upload" type="submit">Загрузить</button>
     </form>
 
-    <h3>Uploaded Files:</h3>
+
     <ul>
+        <div class="result"><h3>Полученный результат:</h3>
         {% for file in files %}
-            <li><a href="{% url 'download_file' file.id %}">{{ file.file.name }}</a></li>
+            <li><button><a class='download' href="{% url 'download_file' file.id %}">Скачать</a></button></li>
+            </div>
+            <img class='image' src="{% url 'download_file' file.id %}" alt="Не то разрешение фото">
         {% empty %}
             <li>No files uploaded yet.</li>
         {% endfor %}
